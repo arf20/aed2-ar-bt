@@ -1,0 +1,103 @@
+MEMORIA AED2                                                                   1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  MEMORIA
+                            PRACTICA 2 - AED2
+                                 Problema 9
+                          JOSE RAMON HOYOS BARCELO
+
+            +-----------------------+------+-----------------------+
+            | Nombre                | Grp  | e-mail                |
+            +-----------------------+------+-----------------------+
+            | Angel Ruiz Fernandez  | G2.2 | a.ruizfernandez@um.es |
+            | Alberto Velasco Cotes | G2.2 | a.velascocotes@um.es  |
+            +-----------------------+------+-----------------------+
+
+                          Cuenta de Mooshak: G2_36
+
+
+MEMORIA AED2                                                                   2
+
+1. Lista de problemas resueltos........................................... 3
+2. Resolucion de problemas ............................................... 3
+2.1. Avance Rapido ....................................................... 3
+2.1.1. Pseudocódigo y explicación ........................................ 3
+2.1.2. Programación del algoritmo ........................................ 3
+2.1.3. Estudio teórico ................................................... 3
+2.1.4. Estudio experimetal ............................................... 3
+2.1.5. Contraste de estudio teorico y experimental ....................... 3
+2.2. Backtracking ........................................................ 3
+2.2.1. Pseudocódigo y explicación ........................................ 3
+2.2.2. Programación del algoritmo ........................................ 3
+2.2.3. Estudio teórico ................................................... 3
+2.2.4. Estudio experimetal ............................................... 3
+2.2.5. Contraste de estudio teorico y experimental ....................... 3
+3. Conclusiones .......................................................... 3
+
+MEMORIA AED2                                                                   3
+
+1. Lista de problemas resueltos
+
+    +-------+----------+
+    | ENVIO | PROBLEMA |
+    +-------+----------+
+    | 135   | C_AR     |
+    | 55    | K_Ba     |
+    +-------+----------+
+
+2. Resolucion de problemas
+
+2.1. Avance rapido
+
+2.1.1. Pseudocodigo y explicación
+
+2.1.2. Programación del algoritmo
+
+2.1.3. Estudio teórico
+
+2.1.4. Estudio experimetal
+
+2.1.5. Contraste de estudio teorico y experimental
+
+2.2. Backtracking
+
+2.2.1. Pseudocódigo y explicación
+
+2.2.2. Programación del algoritmo
+
+2.2.3. Estudio teórico
+
+2.2.4. Estudio experimetal
+
+2.2.5. Contraste de estudio teorico y experimental
+
+3. Conclusiones
+
