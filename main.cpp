@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <list>
 #include <algorithm>
 #include <numeric>
 #include <climits>
@@ -21,8 +20,8 @@ std::pair<int, int> bt(std::vector<int> pesos) {
 
     std::vector<int> s(n, -1);
 
-    int sumequipoA = 0, sumequipoB = 0;
-    int solsumequipoA = 0, solsumequipoB = 0;
+    int pesoActA = 0, pesoActB = 0;
+    int pesoOptA = 0, pesoOptB = 0;
 
     size_t c = 0;
 
@@ -30,20 +29,20 @@ std::pair<int, int> bt(std::vector<int> pesos) {
         // generar
         //std::cout << nivel << std::endl;
         if (s[nivel] == 0)
-            sumequipoA -= pesos[nivel];
+            pesoActA -= pesos[nivel];
 
         s[nivel]++;
         if (s[nivel] == 0)
-            sumequipoA += pesos[nivel];
+            pesoActA += pesos[nivel];
         else if (s[nivel] == 1)
-            sumequipoB += pesos[nivel];
+            pesoActB += pesos[nivel];
 
-        int diff = std::abs(sumequipoA - sumequipoB);
+        int diff = std::abs(pesoActA - pesoActB);
 
 #if 0
         std::cout << std::setw(2) << nivel << ": ";
         prints(s);
-        std::cout << ": " << sumequipoA << ", " << sumequipoB << " -> " << diff << std::endl;
+        std::cout << ": " << pesoActA << ", " << pesoActB << " -> " << diff << std::endl;
 #endif
 
         // solucion
@@ -51,24 +50,24 @@ std::pair<int, int> bt(std::vector<int> pesos) {
             //std::cout << "sol" << std::endl;
             if (diff < voa) {
                 voa = diff;
-                solsumequipoA = sumequipoA;
-                solsumequipoB = sumequipoB;
+                pesoOptA = pesoActA;
+                pesoOptB = pesoActB;
             }
         }
         // criterio
         if (
             (nivel != n - 1)
-            && (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // mejora 1300%
-            && (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // mejora 114%
+            //&& (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // mejora 1300%
+            //&& (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // mejora 114%
         )
             nivel++;
         // retroceder
         else
             while (!(s[nivel] < 1) && nivel >= 0) {
                 if (s[nivel] == 0)
-                    sumequipoA -= pesos[nivel];
+                    pesoActA -= pesos[nivel];
                 else if (s[nivel] == 1)
-                    sumequipoB -= pesos[nivel];
+                    pesoActB -= pesos[nivel];
                 s[nivel] = -1;
                 nivel--;
             }
@@ -76,12 +75,12 @@ std::pair<int, int> bt(std::vector<int> pesos) {
         c++;
     }
 
-    //std::cout << c << std::endl;
+    std::cerr << c << ",";
     
-    if (solsumequipoA > solsumequipoB)
-        std::swap(solsumequipoA, solsumequipoB);
+    if (pesoOptA > pesoOptB)
+        std::swap(pesoOptA, pesoOptB);
     
-    return std::pair<int, int>(solsumequipoA, solsumequipoB);
+    return std::pair<int, int>(pesoOptA, pesoOptB);
 }
 
 std::pair<int, int> ar(std::vector<int> pesos) {
@@ -125,7 +124,9 @@ int main() {
             pesos.push_back(t);
         }
 
+        std::cerr << n << ",";
         auto sol = bt(pesos);
+        std::cerr << std::endl;
 
         std::cout << sol.first << " " << sol.second << std::endl;
 

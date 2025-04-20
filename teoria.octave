@@ -1,0 +1,10 @@
+# coeficiente binomial con función gamma
+c = @(n, k) gamma(n+1)./(gamma(k+1).*gamma(n-k+1))
+# numero de soluciones
+s = @(n) c(n, n./2) + c(n, n./2-1) + c(n, n./2+1)
+# numero de nodos
+a = @(n) 2.^(log2(s(n))+1) - 2
+# plot
+x = 4:0.1:30
+semilogy(x, a(x))
+

@@ -13,7 +13,7 @@ $(TARGET): main.cpp
 clean:
 	rm $(TARGET) 
 
-test:
+test: $(TARGET)
 	./bt < test.stdin > run.stdout
 	cmp -s test.stdout run.stdout && echo "PASS" || echo "FAIL"
 
