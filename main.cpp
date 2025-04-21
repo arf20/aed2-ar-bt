@@ -4,6 +4,7 @@
 #include <numeric>
 #include <climits>
 #include <iomanip>
+#include <chrono>
 
 void prints(std::vector<int>& s) {
     for (int& t : s)
@@ -57,8 +58,8 @@ std::pair<int, int> bt(std::vector<int> pesos) {
         // criterio
         if (
             (nivel != n - 1)
-            //&& (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // mejora 1300%
-            //&& (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // mejora 114%
+            && (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // mejora 1300%
+            && (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // mejora 114%
         )
             nivel++;
         // retroceder
@@ -75,8 +76,6 @@ std::pair<int, int> bt(std::vector<int> pesos) {
         c++;
     }
 
-    std::cerr << c << ",";
-    
     if (pesoOptA > pesoOptB)
         std::swap(pesoOptA, pesoOptB);
     
@@ -125,8 +124,12 @@ int main() {
         }
 
         std::cerr << n << ",";
+
+        auto start = std::chrono::system_clock::now();
         auto sol = bt(pesos);
-        std::cerr << std::endl;
+        auto end = std::chrono::system_clock::now();
+        std::chrono::duration<double> delta = end - start;
+        std::cerr << delta.count() << std::endl;
 
         std::cout << sol.first << " " << sol.second << std::endl;
 

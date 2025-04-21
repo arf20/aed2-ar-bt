@@ -614,8 +614,6 @@ dificiles de formular matematicamente. Se verán en el estudio experimental.
 
 2.2.4. Estudio experimetal
 
-
-
   1e+09 +---------------------------------------------------------------+
         |+         +         +          +          +         +    *    +|
   1e+08 |con poda    +                                         *      ++|
@@ -639,7 +637,33 @@ dificiles de formular matematicamente. Se verán en el estudio experimental.
      10 +---------------------------------------------------------------+
         0          5         10         15         20        25         30
 
-    Tabla 2. Grafico logaritmico de tamaño de vector pesos vs iteraciones
+    Tabla 2. Grafico logaritmico de tamaño de vector pesos vs tamaño del arbol
+             con y sin poda.
+
+ 10.0000000 +------------------------------------------------------------+   
+            |+        +         +          +         +         + * +    +|   
+            |sin poda    +                                       * *    +|   
+  1.0000000 |con poda    *                                     * *     +-|   
+            |+                                                 *        +|   
+            |+                                         * *              +|   
+  0.1000000 |-+                                        * *             +-|   
+            |+                                     *                    +|   
+            |+                                     +                    +|   
+  0.0100000 |-+                                *                       +-|   
+            |+                               * +                        +|   
+  0.0010000 |++                              +                         ++|   
+            |+                          *                               +|   
+            |+                    * *                                   +|   
+  0.0001000 |-+                     +                                  +-|   
+            |+                    +                                     +|   
+            |+                *                                         +|   
+  0.0000100 |-+                                                        +-|   
+            |+      *                                                   +|   
+            |+    * * +         +          +         +         +        +|   
+  0.0000010 +------------------------------------------------------------+   
+            0         5         10         15        20        25        30
+
+    Tabla 3. Grafico de tiempo por prueba vs tamaño de vector de pesos
              con y sin poda.
 
 

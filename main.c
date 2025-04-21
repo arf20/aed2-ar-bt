@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdint.h>
+#include <sys/time.h>
 
 typedef struct {
     int a;
@@ -90,8 +92,8 @@ sol_t bt(int *pesos, int n) {
         // criterio
         if (
             (nivel != n - 1)
-            && (sum(&pesos[nivel], n - nivel) > diff)                                   // mejora 1300%
-            && (abs(count(s, n, 0) - count(s, n, 1)) < n - nivel)        // mejora 114%
+            //&& (sum(&pesos[nivel], n - nivel) > diff)                                   // mejora 1300%
+            //&& (abs(count(s, n, 0) - count(s, n, 1)) < n - nivel)        // mejora 114%
         )
             nivel++;
         // retroceder
@@ -157,7 +159,14 @@ int main() {
             pesos[i] = t;
         }
 
+        struct timeval tv;
+        gettimeofday(&tv,NULL);
+        uint64_t start = tv.tv_sec*(uint64_t)1000000+tv.tv_usec;
         sol_t sol = bt(pesos, n);
+        gettimeofday(&tv,NULL);
+        uint64_t end = tv.tv_sec*(uint64_t)1000000+tv.tv_usec;
+
+        fprintf(stderr, "%d,%f\n", n, (float)(end-start)/1000000.0f);
 
         printf("%d %d\n", sol.a, sol.b);
     }
