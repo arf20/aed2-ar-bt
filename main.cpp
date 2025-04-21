@@ -58,8 +58,8 @@ std::pair<int, int> bt(std::vector<int> pesos) {
         // criterio
         if (
             (nivel != n - 1)
-            && (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // mejora 1300%
-            && (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // mejora 114%
+            && (std::accumulate(pesos.begin() + nivel, pesos.end(), type) > diff)                                   // criterio 1: mejora 1300%
+            //&& (std::abs(std::count(s.begin(), s.end(), 0) - std::count(s.begin(), s.end(), 1)) < n - nivel)        // criterio 2: mejora 114%
         )
             nivel++;
         // retroceder
@@ -75,6 +75,8 @@ std::pair<int, int> bt(std::vector<int> pesos) {
 
         c++;
     }
+
+    std::cerr << c << std::endl;
 
     if (pesoOptA > pesoOptB)
         std::swap(pesoOptA, pesoOptB);
@@ -129,7 +131,7 @@ int main() {
         auto sol = bt(pesos);
         auto end = std::chrono::system_clock::now();
         std::chrono::duration<double> delta = end - start;
-        std::cerr << delta.count() << std::endl;
+        //std::cerr << delta.count() << std::endl;
 
         std::cout << sol.first << " " << sol.second << std::endl;
 

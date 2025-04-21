@@ -55,6 +55,11 @@ sol_t bt(int *pesos, int n) {
     for (int i = 0; i < n; i++)
         s[i] = -1;
 
+    int *sum_end_lookup = malloc(sizeof(int) * n);
+    for (int i = 0; i < n; i++)
+        sum_end_lookup[i] = sum(&pesos[i], n - i);
+
+
     int sumequipoA = 0, sumequipoB = 0;
     int solsumequipoA = 0, solsumequipoB = 0;
 
@@ -92,8 +97,8 @@ sol_t bt(int *pesos, int n) {
         // criterio
         if (
             (nivel != n - 1)
-            //&& (sum(&pesos[nivel], n - nivel) > diff)                                   // mejora 1300%
-            //&& (abs(count(s, n, 0) - count(s, n, 1)) < n - nivel)        // mejora 114%
+            && (sum_end_lookup[nivel] > diff)                               // mejora 1300%
+            //&& (abs(count(s, n, 0) - count(s, n, 1)) < n - nivel)         // mejora 114%
         )
             nivel++;
         // retroceder
@@ -166,7 +171,7 @@ int main() {
         gettimeofday(&tv,NULL);
         uint64_t end = tv.tv_sec*(uint64_t)1000000+tv.tv_usec;
 
-        fprintf(stderr, "%d,%f\n", n, (float)(end-start)/1000000.0f);
+        fprintf(stderr, "%d,%f\n", n, (double)(end-start)/1000000.0);
 
         printf("%d %d\n", sol.a, sol.b);
     }

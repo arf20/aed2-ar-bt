@@ -465,9 +465,9 @@ Entero, Entero BT(pesos):
 
         # criterio de poda
         si
-          nivel != n - 1
-          && sum(pesos[nivel:]) > diff                          # poda 1300%
-          && |contar(s, 0) - contar(s, 1)| < n - nivel:         # poda 114%
+          nivel != n - 1                                        
+          && sum(pesos[nivel:]) > diff                          # criterio 1
+          && |contar(s, 0) - contar(s, 1)| < n - nivel:         # criterio 2
             nivel = nivel + 1
         # retroceder
         sino:
@@ -608,66 +608,117 @@ dificiles de formular matematicamente. Se verán en el estudio experimental.
      10 +---------------------------------------------------------------+
         0          5         10         15         20        25         30
 
-    Tabla 1. Grafico logaritmo del crecimiento del tamaño del arbol, lineal
-             porque el tamaño crece de forma exponencial.
+    Figura 1. Grafico logaritmo del crecimiento del tamaño del arbol, lineal
+              porque el tamaño crece de forma exponencial.
 MEMORIA AED2                                                                   3
 
 2.2.4. Estudio experimetal
 
-  1e+09 +---------------------------------------------------------------+
-        |+         +         +          +          +         +    *    +|
-  1e+08 |con poda    +                                         *      ++|
-        |sin poda    *                                       *         +|
-        |+                                                             +|
-  1e+07 |-+                                            *       +  +   +-|
-        |+                                           *       + +       +|
-  1e+06 |++                                      *           +        ++|
-        |+                                           + +               +|
-        |+                                  *        + +               +|
- 100000 |-+                               *      +                    +-|
-        |+                            *                                +|
-  10000 |++                               + +                         ++|
-        |+                     *  *                                    +|
-        |+                            +                                +|
-   1000 |-+                *   +  +                                   +-|
-        |+                                                             +|
-    100 |++                +                                          ++|
-        |+                                                             +|
-        |+       * +         +          +          +         +         +|
-     10 +---------------------------------------------------------------+
-        0          5         10         15         20        25         30
+  1e+09 +---------------------------------------------------------------+   
+        |+         +         +          +          +         +    *    +|   
+  1e+08 |con poda criterio 1 y 2    +                          *      ++|   
+        |+   con poda criterio 1    #                        *         +|   
+        |+              sin poda    *                          #       +|   
+  1e+07 |-+                                            *       +  #   +-|   
+        |+                                           *       # #       +|   
+  1e+06 |++                                      *           #        ++|   
+        |+                                           # #               +|   
+        |+                                  *        + #               +|   
+ 100000 |-+                               *      #                    +-|   
+        |+                            *                                +|   
+  10000 |++                               # #                         ++|   
+        |+                     *  *                                    +|   
+        |+                            #                                +|   
+   1000 |-+                *   #  #                                   +-|   
+        |+                                                             +|   
+    100 |++                #                                          ++|   
+        |+                                                             +|   
+        |+       * +         +          +          +         +         +|   
+     10 +---------------------------------------------------------------+   
+        0          5         10         15         20        25         30 
+                                        n
+    Figura 2. Grafico logaritmico de tamaño de vector pesos vs tamaño del arbol
+              con y sin poda.
 
-    Tabla 2. Grafico logaritmico de tamaño de vector pesos vs tamaño del arbol
-             con y sin poda.
+    +-----------+-----------+-----------+-----------+
+    | poda      | A         | B         | R^2       |
+    +-----------+-----------+-----------+-----------+
+    | con 1,2   | 0.23569   | 0.58473   | 0.9925    |
+    | con 1     | 0.20940   | 0.59397   | 0.9928    |
+    | sin       | 0.6258911 | 0.6961438 | 1         |
+    +-----------+-----------+-----------+-----------+
+    Tabla 1. Regresión exponencial del tamaño de los arboles en forma
+             y = A*e^(B*x)
+
+El tamaño del arbol es efectivamente exponencial. El criterio 1 es el que hace
+la mayoría de la poda, mientras que el criterio 2 influye menos.
+
+MEMORIA AED2                                                                   3
 
  10.0000000 +------------------------------------------------------------+   
-            |+        +         +          +         +         + * +    +|   
-            |sin poda    +                                       * *    +|   
-  1.0000000 |con poda    *                                     * *     +-|   
-            |+                                                 *        +|   
-            |+                                         * *              +|   
-  0.1000000 |-+                                        * *             +-|   
-            |+                                     *                    +|   
-            |+                                     +                    +|   
-  0.0100000 |-+                                *                       +-|   
-            |+                               * +                        +|   
-  0.0010000 |++                              +                         ++|   
-            |+                          *                               +|   
-            |+                    * *                                   +|   
-  0.0001000 |-+                     +                                  +-|   
-            |+                    +                                     +|   
+            |+        +         +          +         +         + + *    +|   
+            |con poda criterio 1 y 2    +                        * +    +|   
+  1.0000000 |-+  con poda criterio 1    #                      * #     +-|   
+            |+              sin poda    *                      +   #    +|   
+            |+                                         + *     # #      +|   
+  0.1000000 |-+                                        * *     #       +-|   
+            |+                                     +   # #              +|   
+            |+                                     *   # #              +|   
+  0.0100000 |-+                                +   #                   +-|   
+            |+                               + *                        +|   
+  0.0010000 |++                              * #                       ++|   
+            |+                          *    #                          +|   
+            |+                    + +   #                               +|   
+  0.0001000 |-+                     *                                  +-|   
+            |+                    * #                                   +|   
             |+                *                                         +|   
-  0.0000100 |-+                                                        +-|   
-            |+      *                                                   +|   
+  0.0000100 |-+               #                                        +-|   
+            |+      +                                                   +|   
             |+    * * +         +          +         +         +        +|   
   0.0000010 +------------------------------------------------------------+   
-            0         5         10         15        20        25        30
+            0         5         10         15        20        25        30  
+                                             n                                 
+    Figura 3. Grafico de tiempo por prueba vs tamaño de vector de pesos
+              con y sin poda.
 
-    Tabla 3. Grafico de tiempo por prueba vs tamaño de vector de pesos
-             con y sin poda.
+    
+    +-----------+-----------+-----------+-----------+
+    | poda      | A         | B         | R^2       |
+    +-----------+-----------+-----------+-----------+
+    | con 1,2   | 2.29e-07  | 1.8348    | 0.9914    |
+    | con 1     | 1.52e-07  | 1.743509  | 0.9885    |
+    | sin       | 1.01e-07  | 1.891884  | 0.9944    |
+    +-----------+-----------+-----------+-----------+
+    Tabla 2. Regresión exponencial de los tiempos
 
+En cuanto al tiempo, sin poda tima mas tiempo, con el criterio 1 se rebaja
+bastante el tiempo, sin embargo con los dos criterios, el tiempo aumenta casi
+hasta alcanzar el tiempo sin poda.
 
 2.2.5. Contraste de estudio teorico y experimental
 
+Los resultados teoricos y experimentales concuerdan sin poda y con el
+criterio de poda 1. Sin embargo, cuando se activa el criterio 2, el tiempo
+aumenta en vez de reducirse, ¿por qué?
+
+Los criterios no tienen coste cero. El criterio 1 tiene un bucle que calcula
+la suma de elementos restantes, y el criterio 2 tiene bucles que calculan
+a que equipo pertenece cada peso, que se ejecutaría n veces por cada nodo del
+arbol, haciendo un orden O(a(n)*n) ~= O(n*2^n).
+
+El primer criterio poda mucho mas de los ciclos que cuesta, por eso reduce
+significativamente el tiempo. Pero el segundo, reduce poco la poda costando
+bastante mas ciclos, con lo cual el tiempo sube bastante.
+
+MEMORIA AED2                                                                   3
+
 3. Conclusiones
+
+A no ser que se pueda podar muchisimo el arbol, el backtracking es
+extremadamente costoso computacionalmente, inalcanzable para problemas grandes.
+
+Sin embargo, con problemas np-completos, es mejor que el metodo ingenuo para
+encontrar todas las soluciones posibles o la solución mas optima. Sin embargo,
+si solo se requiere de una solución suboptima, algoritmos como el avance rapido
+o los de programación dinamica son muchisimo mas eficientes.
 
