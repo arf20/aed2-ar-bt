@@ -50,17 +50,21 @@ MEMORIA AED2                                                                   1
 2. Resolucion de problemas ............................................... 3
 2.1. Avance Rapido ....................................................... 3
 2.1.1. Pseudocódigo y explicación ........................................ 3
-2.1.2. Programación del algoritmo ........................................ 3
-2.1.3. Estudio teórico ................................................... 3
-2.1.4. Estudio experimetal ............................................... 3
-2.1.5. Contraste de estudio teorico y experimental ....................... 3
-2.2. Backtracking ........................................................ 3
-2.2.1. Pseudocódigo y explicación ........................................ 3
-2.2.2. Programación del algoritmo ........................................ 3
-2.2.3. Estudio teórico ................................................... 3
-2.2.4. Estudio experimetal ............................................... 3
-2.2.5. Contraste de estudio teorico y experimental ....................... 3
-3. Conclusiones .......................................................... 3
+2.1.2. Programación del algoritmo ........................................ 5
+2.1.3. Estudio teórico ................................................... 9
+2.1.4. Estudio experimetal ............................................... 9
+2.1.5. Contraste de estudio teorico y experimental ...................... 10
+2.2. Backtracking ....................................................... 11
+2.2.1. Pseudocódigo y explicación ....................................... 11
+2.2.2. Programación del algoritmo ....................................... 13
+2.2.3. Estudio teórico .................................................. 14
+2.2.4. Estudio experimetal .............................................. 15
+2.2.5. Contraste de estudio teorico y experimental ...................... 16
+3. Conclusiones ......................................................... 17
+3.1. Avance rapido ...................................................... 17
+3.2. Backtracking ....................................................... 17
+3.3. Conclusión ......................................................... 17
+
 
 MEMORIA AED2                                                                   3
 
@@ -85,7 +89,7 @@ Algoritmo Principal
 Entrada: número de casos de prueba T
 Leer casosPrueba
 Para cada casosPrueba:
-    Leer n  y m 
+    Leer n y m 
     Leer la matriz de distancias[n][n]
 
     mejorDiversidad = -1
@@ -110,7 +114,7 @@ Para cada casosPrueba:
     Escribir mejorSeleccion
 Fin Para
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   4
 
 -------------
 Avance Rápido
@@ -169,7 +173,7 @@ Factible
 Funcion factible(S,m)
     Devolver (tamaño de S < m)
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   5
 
 Este algoritmo se basa en 4 funciones:
 
@@ -228,7 +232,7 @@ int calcularDiversidad(const vector<int>& seleccionados, int** distancias) {
     return suma;
 }
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   6
 
 /*
  *Elige el candidato con más ganancia
@@ -267,7 +271,7 @@ bool factible(const vector<int>& S, int m) {
     return S.size() < (size_t)m;
 }
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   7
 
 /*Función Avance rápido
  *A partir de un elemento de inicio, se construye la solución S agregando en
@@ -311,7 +315,7 @@ vector<int> voraz(int n, int m, int** distancias, int inicio) {
     return resultado;
 }
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   8
 
 int main() {
     int T;
@@ -367,18 +371,18 @@ int main() {
     return 0;
 }
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                   9
 
 2.1.3. Estudio teórico
 
--Para la función 'calcularDiversidad' se recorren los pares distintos(i,j).
-Como el tamaño máximo es m, tendría O(m²).
+- Para la función 'calcularDiversidad' se recorren los pares distintos(i,j).
+  Como el tamaño máximo es m, tendría O(m²).
 
--Para la función 'voraz' necesitamos tener en cuenta la función 'seleccionar'.
-Esta recorre todos los candidatos (en el peor de los casos hasta n-1), y para
-cada uno calcula su ganancia junto con los elementos acutales de la solución
-(como máximo hasta m-1). Por lo tanto el orden de la función 'seleccionar' es
-O(n*m).
+- Para la función 'voraz' necesitamos tener en cuenta la función 'seleccionar'.
+  Esta recorre todos los candidatos (en el peor de los casos hasta n-1), y para
+  cada uno calcula su ganancia junto con los elementos acutales de la solución
+  (como máximo hasta m-1). Por lo tanto el orden de la función 'seleccionar' es
+  O(n*m).
 
 La función 'voraz' hace eso para cada candidato. Por lo tanto, el orden de la
 función sería O(n*m²) para el peor de los casos (cuando se realizan todas las
@@ -386,14 +390,66 @@ iteraciones posibles).
 Para el mejor caso (número de candidatos pequeño o m pequeño), el orden sería de
 0(n*m).
 
-
 2.1.4. Estudio experimetal
+
+Para realizar este estudio experimental, hemos generado diferentes matrices con
+distinto tamaño de n y m (hemos decidido que m = n/2).
+
+ - Primero hemos generado matrices con un n entre 5 y 15.
+ - Después hemos generado matrices con un n entre 15 y 30.
+ - Por último hemos generado matrices con un n entre 30 y 50.
+
+Para cada una, hemos probado con diferente número de casos. En concreto, con
+1000 , 5000 y 10000 casos.
+Con todas estas pruebas hemos creado una gráfica la cual representa el tamaño
+de las entradas en el eje X y los tiempos en el eje Y.
+
+     50 +-------------------------------------------------------------------+   
+        |           +            +           +           +            +     |   
+        | n pequeña +--+--+                                         --*     |   
+        | n mediana +--#--+                                     ----        |   
+     40 |-+n grande +--*--+                                -----          +-|   
+        |                                              ----                 |   
+        |                                          ----                     |   
+        |                                     -----                         |   
+     30 |-+                               ----                            +-|   
+        |                             -*--                                  |   
+        |                          ---                                      |   
+        |                        --                                         |   
+     20 |-+                   ---                                         +-|   
+        |                  ---                                              |   
+        |               ---                                                 |   
+        |            ---                                                    |   
+     10 |-+        --                                          -------#   +-|   
+        |       ---                            ----------------             |   
+        |     *-           ------------#-------                             |   
+        |     #------------------------+------------------------------+     |   
+      0 +-------------------------------------------------------------------+   
+        0          2000         4000        6000        8000        10000       
+                                        casos
+
+MEMORIA AED2                                                                  10
 
 2.1.5. Contraste de estudio teorico y experimental
 
-2.2. Backtracking
+En la gráfica se puede ver que las entradas con distancias más grandes aumentan
+significativamente el tiempo de ejecución, mientras que las distancias pequeñas
+muestran tiempos de ejecución más bajos.
 
-MEMORIA AED2                                                                   3
+Podemos apreciar que no se aprecian discrepancias entre el estudio teórico y el
+experimental, por lo tanto, coinciden en ambos casos. Ambos muestran que el
+algoritmo es eficiente para valores pequeños de n, y que según va aumentando, el
+algoritmo empieza a ser más costoso.
+
+El tiempo de ejecución obtenido se debe principalmente al crecimiento cuadrático
+en el cálculo de la diversidad y selección de elementos. También se debe a la
+evaluación de cada elemento candidato con todos los elementos seleccionados
+actuales. Esto hace que el tiempo de ejecución del algoritmo aumente
+significativamente.
+
+MEMORIA AED2                                                                  11
+
+2.2. Backtracking
 
 2.2.1. Pseudocódigo y explicación
 
@@ -427,7 +483,7 @@ el equipo A sea mas pequeño de B para resolver la indeterminación del orden,
 y se retorna la solución compuesta de los pesos de cada equipo.
 
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  12
 
 ```
 Entero, Entero BT(pesos):
@@ -488,7 +544,7 @@ Entero, Entero BT(pesos):
 ```
 
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  13
 
 2.2.2. Programación del algoritmo
 
@@ -550,7 +606,7 @@ std::pair<int, int> bt(std::vector<int> pesos) {
     
     return std::pair<int, int>(pesoOptA, pesoOptB);
 }
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  14
 
 2.2.3. Estudio teórico
 
@@ -610,7 +666,7 @@ dificiles de formular matematicamente. Se verán en el estudio experimental.
 
     Figura 1. Grafico logaritmo del crecimiento del tamaño del arbol, lineal
               porque el tamaño crece de forma exponencial.
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  15
 
 2.2.4. Estudio experimetal
 
@@ -653,7 +709,7 @@ dificiles de formular matematicamente. Se verán en el estudio experimental.
 El tamaño del arbol es efectivamente exponencial. El criterio 1 es el que hace
 la mayoría de la poda, mientras que el criterio 2 influye menos.
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  16
 
  10.0000000 +------------------------------------------------------------+   
             |+        +         +          +         +         + + *    +|   
@@ -710,9 +766,17 @@ El primer criterio poda mucho mas de los ciclos que cuesta, por eso reduce
 significativamente el tiempo. Pero el segundo, reduce poco la poda costando
 bastante mas ciclos, con lo cual el tiempo sube bastante.
 
-MEMORIA AED2                                                                   3
+MEMORIA AED2                                                                  17
 
 3. Conclusiones
+
+3.1. Avance rapido
+
+El avance rapido es una buena forma de encontrar soluciones posibles rapidamente
+sin tener las restricciones de ser optima o unica en problemas np-completos
+ya que es mucho mas rapida (de ahi el nombre) y eficiente para lo buena que es.
+
+3.2. Backtracking
 
 A no ser que se pueda podar muchisimo el arbol, el backtracking es
 extremadamente costoso computacionalmente, inalcanzable para problemas grandes.
@@ -721,4 +785,13 @@ Sin embargo, con problemas np-completos, es mejor que el metodo ingenuo para
 encontrar todas las soluciones posibles o la solución mas optima. Sin embargo,
 si solo se requiere de una solución suboptima, algoritmos como el avance rapido
 o los de programación dinamica son muchisimo mas eficientes.
+
+3.3. Conclusión
+
+En conclusión, esta práctica nos ha ayudado sobre todo a poder comprender el
+tema con más facilidad ya que, el hecho de poder programar uno mismo el
+algoritmo nos hace tener en cuenta ciertos factores que quizá no hubiéramos
+tenido en cuenta solo con la teoría. 
+Esto es clave para poder entender como los algoritmos se comportan en
+situaciones reales
 
